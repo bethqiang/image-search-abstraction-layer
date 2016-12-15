@@ -11,11 +11,18 @@ app.use(express.static(path.join(__dirname, './public')));
 app.use(require('./routes'));
 
 const models = require('./models');
+const Query = models.Query;
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(chalk.blue(`Contact from intelligent life received on port ${port}`));
+Query.sync()
+.then(() => {
+  console.log(chalk.blue('Far away satellite synced successfully'));
+  app.listen(port, () => {
+    console.log(chalk.blue(`Contact from intelligent life received on port ${port}`)
+  );
 });
+})
+.catch(console.error);
 
 app.use('/', (err, req, res, next) => {
   console.log(chalk.red('Houston, we have a problem.'));
