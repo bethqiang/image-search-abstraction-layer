@@ -19,8 +19,8 @@ router.get('/api/search', (req, res, next) => {
   const url = `https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.SE_ID}&q=${query}&searchType=image&start=${offset}`;
 
   axios.get(url)
-  .then(response => {
-    const items = response.data.items;
+  .then(result => {
+    const items = result.data.items;
     const filtered = items.map(item => {
       return {
         title: item.title,
@@ -40,9 +40,24 @@ router.get('/api/search', (req, res, next) => {
 
 });
 
+// Get the 10 most recent queries and when they were searched
 router.get('/api/latest', (req, res, next) => {
-  // pull the 10 most recent queries from database
-  // res.json({ term: "string", when: "timestamp"})
+  Query.findAll({
+    limit: 10,
+    order: [
+      ['createdAt', 'DESC']
+    ]
+  })
+  .then(result => {
+    const filtered = result.map(item => {
+      return {
+        query: item.query,
+        when: item.createdAt
+      };
+    });
+    res.json(filtered);
+  })
+  .catch(next);
 });
 
 module.exports = router;
