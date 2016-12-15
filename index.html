@@ -16,6 +16,44 @@
     <h1>Image Search API</h1>
     <hr/>
 
+    <blockquote>
+
+      <p>Pass a search string and an optional offset query in the URL to get a set of image information relating to your search string. Image information includes title, URL, text snippet, thumbnail image URL, and the page's URL.</p>
+
+      <p>Paginate through the responses by adding a <code>?offset=num</code> parameter to the URL, where <code>num</code> is a multiple of 10.</p>
+
+      <p>Get a list of the 10 most recently searched strings by hitting the <code>/api/latest</code> endpoint.</p>
+
+    </blockquote>
+
+    <h3>Example Image Search:</h3>
+
+    <p><a href="https://img-search-api-bq.herokuapp.com/api/search?q=cats">https://img-search-api-bq.herokuapp.com/api/search?q=cats</a> will result in 10 items, each of which will have title, url, snippet, thumbnail, and context fields.</p>
+
+    <pre><code>
+    {
+      title: "Cats scared of Cucumbers Compilation - Cats Vs Cucumbers - Funny ...",
+      url: "https://i.ytimg.com/vi/cNycdfFEgBc/maxresdefault.jpg",
+      snippet: "Cats scared of Cucumbers ...",
+      thumbnail: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQIpKVlrysjWTWyDxnvCg12eSyOy2CcISl-ZyHcTmhmhp-zL78Mq7s0_4Li",
+      context: "https://www.youtube.com/watch?v=cNycdfFEgBc"
+    }
+    </code></pre>
+
+    <p><a href="https://img-search-api-bq.herokuapp.com/api/search?q=cats&offset=10">https://img-search-api-bq.herokuapp.com/api/search?q=cats&offset=10</a>
+    will return the next "page," or the next set of 10 results.</p>
+
+    <h3>Example Latest Search:</h3>
+
+    <p><a href="https://img-search-api-bq.herokuapp.com/api/latest">https://img-search-api-bq.herokuapp.com/api/latest</a> will result in 10 items, each of which will have query and when fields.</p>
+
+    <pre><code>
+    {
+      query: "cats",
+      when: "2016-12-15T20:50:00.467Z"
+    }
+    </code></pre>
+
   </div>
 
 <footer>
