@@ -26,7 +26,7 @@ An API endpoint that allows you to search for images and browse recent search qu
 
 ### Example Latest Search:
 
-[https://img-search-api-bq.herokuapp.com/api/latest](https://img-search-api-bq.herokuapp.com/api/latest) will result in 10 items, each of which will have query and when fields.
+[https://img-search-api-bq.herokuapp.com/api/latest](https://img-search-api-bq.herokuapp.com/api/latest) will result in the most recent 10 searches, each of which will have query and when fields.
 
 ```
 {
